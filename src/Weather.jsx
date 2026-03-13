@@ -8,23 +8,30 @@ function Weather() {
   const [temperature, setTemperature] = useState("");
   const [description, setDescription] = useState("");
 
-  const getWeather = async () => {
+const getWeather = async () => {
 
-    const apiKey = "0da2d5e57a127d2c0201be480888b537";
+  if(city === ""){
+    alert("Please enter a city name");
+    return;
+  }
+
+  try {
+
+    const apiKey = "YOUR_API_KEY";
 
     const url =
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-      city +
-      "&appid=" +
-      apiKey +
-      "&units=metric";
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     const res = await axios.get(url);
 
     setWeather(res.data.weather[0].main);
     setTemperature(res.data.main.temp);
     setDescription(res.data.weather[0].description);
-  };
+
+  } catch (error) {
+    alert("City not found");
+  }
+};
 
   return (
 
