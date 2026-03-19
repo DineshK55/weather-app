@@ -17,22 +17,26 @@ const getWeather = async () => {
 
   try {
 
-    const apiKey = "YOUR_API_KEY";
+    const apiKey = "0da2d5e57a127d2c0201be480888b537";
 
     const url =
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
+    console.log(url); // 👈 add this
+
     const res = await axios.get(url);
+
+    console.log(res.data); // 👈 add this
 
     setWeather(res.data.weather[0].main);
     setTemperature(res.data.main.temp);
     setDescription(res.data.weather[0].description);
 
   } catch (error) {
+    console.log(error); // 👈 see exact error
     alert("City not found");
   }
 };
-
   return (
 
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 to-indigo-500">
